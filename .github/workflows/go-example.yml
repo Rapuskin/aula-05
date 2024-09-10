@@ -14,10 +14,11 @@ jobs:
       - name: Check out the repo  # Primeiro passo: baixar o repositório
         uses: actions/checkout@v3
 
-      - name: Set up Go environment  # Configurar o ambiente Go
-        uses: actions/setup-go@v3
-        with:
-          go-version: '1.16'  # Especificar a versão do Go
+      - name: Initialize Go module  # Inicializar o módulo Go
+        run: go mod init aula-05  # Substitua 'aula-05' pelo nome do seu repositório
+
+      - name: Download Go dependencies  # Baixar as dependências do Go (se necessário)
+        run: go mod tidy
 
       - name: Build project  # Comando para compilar o projeto
         run: go build -o linux ./...
