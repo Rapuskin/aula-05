@@ -17,19 +17,19 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build for Linux
-        run: go build ${{ env.FILE_NAME }}.go
+        run: go build -o ${{ env.FILE_NAME }} ${{ env.FILE_NAME }}.go  # Adiciona o flag -o para nomear o binário
 
       - name: Build for Windows
-        run: GOOS=windows GOARCH=amd64 go build ${{ env.FILE_NAME }}.go
+        run: GOOS=windows GOARCH=amd64 go build -o ${{ env.FILE_NAME }}.exe ${{ env.FILE_NAME }}.go  # Especifica a saída com .exe
 
       - name: Upload artifact for Linux
-        uses: actions/upload-artifact@v1.0.0
+        uses: actions/upload-artifact@v3  # Use a versão mais recente
         with:
           name: linux
           path: ./${{ env.FILE_NAME }}
 
       - name: Upload artifact for Windows
-        uses: actions/upload-artifact@v1.0.0
+        uses: actions/upload-artifact@v3  # Use a versão mais recente
         with:
           name: windows
           path: ./${{ env.FILE_NAME }}.exe
@@ -68,4 +68,4 @@ jobs:
           name: windows
 
       - name: List files in current directory
-        run: dir
+        run: dir
