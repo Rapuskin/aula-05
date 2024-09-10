@@ -20,8 +20,8 @@ jobs:
       - name: Download Go dependencies  # Baixar as dependências do Go (se necessário)
         run: go mod tidy
 
-      - name: Build project  # Comando para compilar o projeto
-        run: go build -o linux ./...
+      - name: Build project  # Ajuste o caminho do build para onde o código Go está
+        run: go build -o linux ./src  # Substitua './src' pelo caminho correto
 
       - name: Upload Linux artifact  # Fazer upload do artefato gerado
         uses: actions/upload-artifact@v3
